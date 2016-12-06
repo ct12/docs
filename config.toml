@@ -1,0 +1,54 @@
+theme = "docuapi"
+languageCode = "en-us"
+baseurl = "http://docuapi.com/"
+title = "StockDB Documentation"
+publishdir = "docs"
+
+# Code higlighting settings
+pygmentsCodefences = true
+pygmentsCodeFencesGuesSsyntax = false
+pygmentsOptions = ""
+pygmentsStyle = "monokai"
+# The monokai stylesheet is included in the base template.
+pygmentsUseClasses = true
+
+defaultContentLanguage = "en"
+
+[params]
+search = false
+  
+# Configure the language example tabs.
+[[params.language_tabs]]
+key = "go"
+name = "Golang"
+
+#Languages 
+[languages]
+
+[languages.en]
+languageName = "English"
+weight = 1
+title = "StockDB Documentation"
+# Left sidebar footer items. Use HTMl or Markdown.
+toc_footers = [
+"[简体中文](/cn/)",
+"[Official Repos](https://github.com/miaolz123/stockdb)"
+]
+[languages.en.blackfriday]
+angledQuotes = false
+hrefTargetBlank = true
+
+
+[languages.cn]
+languageName = "中文"
+weight = 2
+title = "StockDB文档"
+# Left sidebar footer items. Use HTMl or Markdown.
+toc_footers = [
+"[English](/)",
+"[官方仓库](https://github.com/miaolz123/stockdb)"
+]
+[languages.cn.blackfriday]
+# Norwegian uses angled quotes
+angledQuotes = true
+hrefTargetBlank = true
