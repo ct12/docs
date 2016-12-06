@@ -1,5 +1,5 @@
 ---
-weight: 11
+weight: 2
 ---
 
 # K线数据
@@ -71,7 +71,7 @@ func main() {
 | opt.period | Long Integer | false | 该数据的周期，单位为秒 |
 
 <aside class="notice">
-如果 <code>opt.Market</code>、<code>opt.Symbol</code>、<code>opt.Period</code> 未设置，将使用 StockDB 服务端的默认配置
+如果 <code>opt.market</code>、<code>opt.symbol</code>、<code>opt.period</code> 未设置，将使用 StockDB 服务端的默认配置。
 </aside>
 
 <br>
@@ -132,7 +132,7 @@ func main() {
 | opt.period | Long Integer | false | 该数据的周期，单位为秒 |
 
 <aside class="notice">
-如果 <code>opt.Market</code>、<code>opt.Symbol</code>、<code>opt.Period</code> 未设置，将使用 StockDB 服务端的默认配置
+如果 <code>opt.market</code>、<code>opt.symbol</code>、<code>opt.period</code> 未设置，将使用 StockDB 服务端的默认配置。
 </aside>
 
 <br>
@@ -175,12 +175,14 @@ func main() {
 | opt.market | String | false | 市场 |
 | opt.symbol | String | false | 分类标识 |
 | opt.period | Long Integer | false | 周期，单位为秒 |
-| opt.deginTime | Long Integer | false | 开始时间，UNIX 时间 |
+| opt.beginTime | Long Integer | false | 开始时间，UNIX 时间 |
 | opt.endTime | Long Integer | false | 开始时间，UNIX 时间 |
-| opt.invalidPolicy | String | false | 无效数据处理策略，`ibid`表示同上一条数据，`ignore`表示忽略 |
+| opt.invalidPolicy | String | false | 无效数据处理策略，默认为`ibid`，`ibid`表示同上一条数据，`ignore`表示忽略 |
 
 <aside class="notice">
-如果 <code>opt.Market</code>、<code>opt.Symbol</code>、<code>opt.Period</code> 未设置，将使用 StockDB 服务端的默认配置
+如果 <code>opt.market</code>、<code>opt.symbol</code>、<code>opt.period</code> 未设置，将使用 StockDB 服务端的默认配置；
+如果 <code>opt.endTime</code> 小于零，将使用该数据的最新时间；
+如果 <code>opt.beginTime</code> 小于零，将使用 <code>opt.endTime - (1000 * opt.period)</code>。
 </aside>
 
 <br>

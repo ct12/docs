@@ -1,0 +1,780 @@
+<!doctype html>
+<html>
+<head>
+	<meta name="generator" content="Hugo 0.18-DEV" />
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>StockDB Documentation</title>
+    <link href='/slate/stylesheets/monokai.css' rel="stylesheet" media="screen" />
+<link href='/slate/stylesheets/screen.css' rel="stylesheet" media="screen" />
+<link href='/slate/stylesheets/print.css' rel="stylesheet" media="print" />
+
+    
+<script src='/slate/javascripts/all_nosearch.js'></script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-52478213-11', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</head>
+<body class="index" data-languages="[ &#34;go&#34; ]">
+    <a href="#" id="nav-button">
+        <span>
+        NAV
+        <img src='/slate/images/navbar.png'/>
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <img src='/images/logo.png' />
+        
+        <div class="lang-selector">
+            
+            <a href="#" data-language-name="go">Golang</a>
+            
+        </div>
+         
+        
+        <div id="toc">
+        </div>
+         
+        
+        <ul class="toc-footer">
+            
+            <li><a href="/cn/">简体中文</a></li>
+            
+            <li><a href="https://github.com/miaolz123/stockdb" target="_blank">Official Repos</a></li>
+            
+        </ul>
+        
+    </div>
+    <div class="page-wrapper">
+        <div class="dark-box"></div>
+        <div class="content">
+            
+    
+        
+
+<h1 id="简介">简介</h1>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&quot;github.com/miaolz123/stockdb/stockdb&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">client</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;http://localhost:8765&quot;</span><span class="p">,</span> <span class="s">&quot;username:password&quot;</span><span class="p">)</span>
+	<span class="c1">// balabala</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<blockquote>
+<p>注意：把<code>&quot;http://localhost:8765&quot;</code>和<code>&quot;username:password&quot;</code>自己的 StockDB 服务端地址和验证。</p>
+</blockquote>
+
+<p>StockDB 是一个处理交易类数据的数据库解决方案，实现了K线变频、模拟历史市场深度、模拟交易等功能。</p>
+
+<p>对外提供多个编程语言的API接口，支持：</p>
+
+<ul>
+<li>JavaScript（官方）</li>
+<li>Golang（官方）</li>
+<li>Python</li>
+<li>Java</li>
+<li>Ruby</li>
+<li>PHP</li>
+<li>C++</li>
+<li>C#</li>
+</ul>
+
+<h1 id="基本概念">基本概念</h1>
+
+<p>为方便理解 StockDB 的一些概念，下面做一些类比：</p>
+
+<table>
+<thead>
+<tr>
+<th>StockDB</th>
+<th>MySQL</th>
+<th>InfluxDB</th>
+<th>ELasticSearch</th>
+<th>示例</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Market</td>
+<td>Database</td>
+<td>Database</td>
+<td>Index</td>
+<td><code>nasdaq</code>，<code>上证</code></td>
+</tr>
+
+<tr>
+<td>Symbol</td>
+<td>Tabel</td>
+<td>Measurement</td>
+<td>Type</td>
+<td><code>aapl</code>，<code>平安银行</code></td>
+</tr>
+</tbody>
+</table>
+
+    
+        
+
+<h1 id="k线数据">K线数据</h1>
+
+<h2 id="ohlc-结构体">OHLC 结构体</h2>
+
+<blockquote>
+<p><strong>OHLC</strong> 结构体示例：</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span></span><span class="p">{</span>
+  <span class="nt">&quot;time&quot;</span><span class="p">:</span> <span class="mi">1451577600</span><span class="p">,</span>
+  <span class="nt">&quot;open&quot;</span><span class="p">:</span> <span class="mf">123.456</span><span class="p">,</span>
+  <span class="nt">&quot;high&quot;</span><span class="p">:</span> <span class="mf">129.123</span><span class="p">,</span>
+  <span class="nt">&quot;low&quot;</span><span class="p">:</span> <span class="mf">110.789</span><span class="p">,</span>
+  <span class="nt">&quot;close&quot;</span><span class="p">:</span> <span class="mf">119.951</span><span class="p">,</span>
+  <span class="nt">&quot;volume&quot;</span><span class="p">:</span> <span class="mf">357.654</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>time</td>
+<td>Long Integer</td>
+<td>UNIX 时间，1970年1月1日0时0分0秒起至现在的总秒数</td>
+</tr>
+
+<tr>
+<td>open</td>
+<td>Double</td>
+<td>单位时间周期内的开盘价</td>
+</tr>
+
+<tr>
+<td>high</td>
+<td>Double</td>
+<td>单位时间周期内的最高价</td>
+</tr>
+
+<tr>
+<td>low</td>
+<td>Double</td>
+<td>单位时间周期内的最低价</td>
+</tr>
+
+<tr>
+<td>close</td>
+<td>Double</td>
+<td>单位时间周期内的收盘价</td>
+</tr>
+
+<tr>
+<td>volume</td>
+<td>Double</td>
+<td>单位时间周期内的交易量</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="添加一条数据">添加一条数据</h2>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&quot;log&quot;</span>
+
+	<span class="s">&quot;github.com/miaolz123/stockdb/stockdb&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">client</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;http://localhost:8765&quot;</span><span class="p">,</span> <span class="s">&quot;username:password&quot;</span><span class="p">)</span>
+	<span class="nx">data</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">OHLC</span><span class="p">{</span>
+		<span class="nx">Time</span><span class="p">:</span>   <span class="mi">1480737600</span><span class="p">,</span>
+		<span class="nx">Open</span><span class="p">:</span>   <span class="mf">109.17</span><span class="p">,</span>
+		<span class="nx">High</span><span class="p">:</span>   <span class="mf">110.09</span><span class="p">,</span>
+		<span class="nx">Low</span><span class="p">:</span>    <span class="mf">108.85</span><span class="p">,</span>
+		<span class="nx">Close</span><span class="p">:</span>  <span class="mf">109.90</span><span class="p">,</span>
+		<span class="nx">Volume</span><span class="p">:</span> <span class="mf">26528000.0</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="nx">opt</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Option</span><span class="p">{</span>
+		<span class="nx">Market</span><span class="p">:</span> <span class="s">&quot;nasdaq&quot;</span><span class="p">,</span>
+		<span class="nx">Symbol</span><span class="p">:</span> <span class="s">&quot;aapl&quot;</span><span class="p">,</span>
+		<span class="nx">Period</span><span class="p">:</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Day</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="k">if</span> <span class="nx">resp</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">PutOHLC</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">opt</span><span class="p">);</span> <span class="p">!</span><span class="nx">resp</span><span class="p">.</span><span class="nx">Success</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;PutOHLC() error: &quot;</span><span class="p">,</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">Message</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><code>PutOHLC(data, opt)</code></p>
+
+<table>
+<thead>
+<tr>
+<th>请求参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>data</td>
+<td><a href="#ohlc-结构体">OHLC</a> Object</td>
+<td>true</td>
+<td>需要新增的数据</td>
+</tr>
+
+<tr>
+<td>opt</td>
+<td>Object</td>
+<td>true</td>
+<td>操作详细设置</td>
+</tr>
+
+<tr>
+<td>opt.market</td>
+<td>String</td>
+<td>false</td>
+<td>添加该数据到哪个市场</td>
+</tr>
+
+<tr>
+<td>opt.symbol</td>
+<td>String</td>
+<td>false</td>
+<td>添加该数据到哪个分类标识</td>
+</tr>
+
+<tr>
+<td>opt.period</td>
+<td>Long Integer</td>
+<td>false</td>
+<td>该数据的周期，单位为秒</td>
+</tr>
+</tbody>
+</table>
+
+<aside class="notice">
+如果 <code>opt.market</code>、<code>opt.symbol</code>、<code>opt.period</code> 未设置，将使用 StockDB 服务端的默认配置。
+</aside>
+
+<p><br></p>
+
+<table>
+<thead>
+<tr>
+<th>响应名称</th>
+<th>类型</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>success</td>
+<td>Boolean</td>
+<td>是否操作成功</td>
+</tr>
+
+<tr>
+<td>message</td>
+<td>String</td>
+<td>操作失败的错误信息</td>
+</tr>
+
+<tr>
+<td>data</td>
+<td>Null</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="添加多条数据">添加多条数据</h2>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&quot;log&quot;</span>
+
+	<span class="s">&quot;github.com/miaolz123/stockdb/stockdb&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">client</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;http://localhost:8765&quot;</span><span class="p">,</span> <span class="s">&quot;username:password&quot;</span><span class="p">)</span>
+	<span class="nx">data</span> <span class="o">:=</span> <span class="p">[]</span><span class="nx">stockdb</span><span class="p">.</span><span class="nx">OHLC</span><span class="p">{{</span>
+		<span class="nx">Time</span><span class="p">:</span>   <span class="mi">1480651200</span><span class="p">,</span>
+		<span class="nx">Open</span><span class="p">:</span>   <span class="mf">110.37</span><span class="p">,</span>
+		<span class="nx">High</span><span class="p">:</span>   <span class="mf">110.94</span><span class="p">,</span>
+		<span class="nx">Low</span><span class="p">:</span>    <span class="mf">109.03</span><span class="p">,</span>
+		<span class="nx">Close</span><span class="p">:</span>  <span class="mf">109.49</span><span class="p">,</span>
+		<span class="nx">Volume</span><span class="p">:</span> <span class="mf">34324000.0</span><span class="p">,</span>
+	<span class="p">},</span> <span class="p">{</span>
+		<span class="nx">Time</span><span class="p">:</span>   <span class="mi">1480737600</span><span class="p">,</span>
+		<span class="nx">Open</span><span class="p">:</span>   <span class="mf">109.17</span><span class="p">,</span>
+		<span class="nx">High</span><span class="p">:</span>   <span class="mf">110.09</span><span class="p">,</span>
+		<span class="nx">Low</span><span class="p">:</span>    <span class="mf">108.85</span><span class="p">,</span>
+		<span class="nx">Close</span><span class="p">:</span>  <span class="mf">109.90</span><span class="p">,</span>
+		<span class="nx">Volume</span><span class="p">:</span> <span class="mf">26528000.0</span><span class="p">,</span>
+	<span class="p">}}</span>
+	<span class="nx">opt</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Option</span><span class="p">{</span>
+		<span class="nx">Market</span><span class="p">:</span> <span class="s">&quot;nasdaq&quot;</span><span class="p">,</span>
+		<span class="nx">Symbol</span><span class="p">:</span> <span class="s">&quot;aapl&quot;</span><span class="p">,</span>
+		<span class="nx">Period</span><span class="p">:</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Day</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="k">if</span> <span class="nx">resp</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">PutOHLCs</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">opt</span><span class="p">);</span> <span class="p">!</span><span class="nx">resp</span><span class="p">.</span><span class="nx">Success</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;PutOHLCs() error: &quot;</span><span class="p">,</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">Message</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><code>PutOHLC(data, opt)</code></p>
+
+<table>
+<thead>
+<tr>
+<th>请求参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>data</td>
+<td><a href="#ohlc-结构体">OHLC</a> Object List</td>
+<td>true</td>
+<td>需要新增的数据</td>
+</tr>
+
+<tr>
+<td>opt</td>
+<td>Object</td>
+<td>true</td>
+<td>操作详细设置</td>
+</tr>
+
+<tr>
+<td>opt.market</td>
+<td>String</td>
+<td>false</td>
+<td>添加该数据到哪个市场</td>
+</tr>
+
+<tr>
+<td>opt.symbol</td>
+<td>String</td>
+<td>false</td>
+<td>添加该数据到哪个分类标识</td>
+</tr>
+
+<tr>
+<td>opt.period</td>
+<td>Long Integer</td>
+<td>false</td>
+<td>该数据的周期，单位为秒</td>
+</tr>
+</tbody>
+</table>
+
+<aside class="notice">
+如果 <code>opt.market</code>、<code>opt.symbol</code>、<code>opt.period</code> 未设置，将使用 StockDB 服务端的默认配置。
+</aside>
+
+<p><br></p>
+
+<table>
+<thead>
+<tr>
+<th>响应名称</th>
+<th>类型</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>success</td>
+<td>Boolean</td>
+<td>是否操作成功</td>
+</tr>
+
+<tr>
+<td>message</td>
+<td>String</td>
+<td>操作失败的错误信息</td>
+</tr>
+
+<tr>
+<td>data</td>
+<td>Null</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="获取数据">获取数据</h2>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&quot;fmt&quot;</span>
+
+	<span class="s">&quot;github.com/miaolz123/stockdb/stockdb&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">client</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;http://localhost:8765&quot;</span><span class="p">,</span> <span class="s">&quot;username:password&quot;</span><span class="p">)</span>
+	<span class="nx">opt</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Option</span><span class="p">{</span>
+		<span class="nx">Market</span><span class="p">:</span> <span class="s">&quot;nasdaq&quot;</span><span class="p">,</span>
+		<span class="nx">Symbol</span><span class="p">:</span> <span class="s">&quot;aapl&quot;</span><span class="p">,</span>
+		<span class="nx">Period</span><span class="p">:</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Hour</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Hour OHLC:\n%+v\n&quot;</span><span class="p">,</span> <span class="nx">client</span><span class="p">.</span><span class="nx">GetOHLCs</span><span class="p">(</span><span class="nx">opt</span><span class="p">).</span><span class="nx">Data</span><span class="p">)</span>
+	<span class="nx">opt</span><span class="p">.</span><span class="nx">Period</span> <span class="p">=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Week</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Week OHLC:\n%+v\n&quot;</span><span class="p">,</span> <span class="nx">client</span><span class="p">.</span><span class="nx">GetOHLCs</span><span class="p">(</span><span class="nx">opt</span><span class="p">).</span><span class="nx">Data</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><code>GetOHLCs(opt)</code></p>
+
+<table>
+<thead>
+<tr>
+<th>请求参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>opt</td>
+<td>Object</td>
+<td>true</td>
+<td>操作详细设置</td>
+</tr>
+
+<tr>
+<td>opt.market</td>
+<td>String</td>
+<td>false</td>
+<td>市场</td>
+</tr>
+
+<tr>
+<td>opt.symbol</td>
+<td>String</td>
+<td>false</td>
+<td>分类标识</td>
+</tr>
+
+<tr>
+<td>opt.period</td>
+<td>Long Integer</td>
+<td>false</td>
+<td>周期，单位为秒</td>
+</tr>
+
+<tr>
+<td>opt.beginTime</td>
+<td>Long Integer</td>
+<td>false</td>
+<td>开始时间，UNIX 时间</td>
+</tr>
+
+<tr>
+<td>opt.endTime</td>
+<td>Long Integer</td>
+<td>false</td>
+<td>开始时间，UNIX 时间</td>
+</tr>
+
+<tr>
+<td>opt.invalidPolicy</td>
+<td>String</td>
+<td>false</td>
+<td>无效数据处理策略，默认为<code>ibid</code>，<code>ibid</code>表示同上一条数据，<code>ignore</code>表示忽略</td>
+</tr>
+</tbody>
+</table>
+
+<aside class="notice">
+如果 <code>opt.market</code>、<code>opt.symbol</code>、<code>opt.period</code> 未设置，将使用 StockDB 服务端的默认配置；
+如果 <code>opt.endTime</code> 小于零，将使用该数据的最新时间；
+如果 <code>opt.beginTime</code> 小于零，将使用 <code>opt.endTime - (1000 * opt.period)</code>。
+</aside>
+
+<p><br></p>
+
+<table>
+<thead>
+<tr>
+<th>响应名称</th>
+<th>类型</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>success</td>
+<td>Boolean</td>
+<td>是否操作成功</td>
+</tr>
+
+<tr>
+<td>message</td>
+<td>String</td>
+<td>操作失败的错误信息</td>
+</tr>
+
+<tr>
+<td>data</td>
+<td><a href="#ohlc-结构体">OHLC</a> Object List</td>
+<td>获取的数据</td>
+</tr>
+</tbody>
+</table>
+
+    
+        
+
+<h1 id="市场深度">市场深度</h1>
+
+<h2 id="orderbook-结构体">OrderBook 结构体</h2>
+
+<blockquote>
+<p><strong>OrderBook</strong> 结构体示例：</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span></span><span class="p">{</span>
+  <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">123.456</span><span class="p">,</span>
+  <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>price</td>
+<td>Double</td>
+<td>报价</td>
+</tr>
+
+<tr>
+<td>amount</td>
+<td>Double</td>
+<td>数量</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="depth-结构体">Depth 结构体</h2>
+
+<blockquote>
+<p><strong>Depth</strong> 结构体示例：</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span></span><span class="p">{</span>
+  <span class="nt">&quot;bids&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">122.456</span><span class="p">,</span>
+      <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">121.456</span><span class="p">,</span>
+      <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;asks&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">124.456</span><span class="p">,</span>
+      <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">125.456</span><span class="p">,</span>
+      <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>bids</td>
+<td><a href="#orderbook-结构体">OrderBook</a> Object List</td>
+<td>买盘市场深度，按照价格<strong>降序</strong>排列</td>
+</tr>
+
+<tr>
+<td>asks</td>
+<td><a href="#orderbook-结构体">OrderBook</a> Object List</td>
+<td>卖盘市场深度，按照价格<strong>升序</strong>排列</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="获取数据">获取数据</h2>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&quot;fmt&quot;</span>
+
+	<span class="s">&quot;github.com/miaolz123/stockdb/stockdb&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">client</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;http://localhost:8765&quot;</span><span class="p">,</span> <span class="s">&quot;username:password&quot;</span><span class="p">)</span>
+	<span class="nx">opt</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Option</span><span class="p">{</span>
+		<span class="nx">Market</span><span class="p">:</span> <span class="s">&quot;nasdaq&quot;</span><span class="p">,</span>
+		<span class="nx">Symbol</span><span class="p">:</span> <span class="s">&quot;aapl&quot;</span><span class="p">,</span>
+		<span class="nx">BeginTime</span><span class="p">:</span> <span class="mi">1451577600</span><span class="p">,</span>
+		<span class="nx">Period</span><span class="p">:</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Hour</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Market Depth:\n%+v\n&quot;</span><span class="p">,</span> <span class="nx">client</span><span class="p">.</span><span class="nx">GetDepth</span><span class="p">(</span><span class="nx">opt</span><span class="p">).</span><span class="nx">Data</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><code>GetDepth(opt)</code></p>
+
+<table>
+<thead>
+<tr>
+<th>请求参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>opt</td>
+<td>Object</td>
+<td>true</td>
+<td>操作详细设置</td>
+</tr>
+
+<tr>
+<td>opt.market</td>
+<td>String</td>
+<td>false</td>
+<td>市场</td>
+</tr>
+
+<tr>
+<td>opt.symbol</td>
+<td>String</td>
+<td>false</td>
+<td>分类标识</td>
+</tr>
+
+<tr>
+<td>opt.beginTime</td>
+<td>Long Integer</td>
+<td>false</td>
+<td>开始时间，UNIX 时间</td>
+</tr>
+
+<tr>
+<td>opt.period</td>
+<td>Long Integer</td>
+<td>false</td>
+<td>周期，单位为秒</td>
+</tr>
+</tbody>
+</table>
+
+<aside class="notice">
+如果 <code>opt.market</code>、<code>opt.symbol</code>、<code>opt.period</code> 未设置，将使用 StockDB 服务端的默认配置；
+如果 <code>opt.beginTime</code> 小于零，将使用该数据的最新时间。
+</aside>
+
+<p><br></p>
+
+<table>
+<thead>
+<tr>
+<th>响应名称</th>
+<th>类型</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>success</td>
+<td>Boolean</td>
+<td>是否操作成功</td>
+</tr>
+
+<tr>
+<td>message</td>
+<td>String</td>
+<td>操作失败的错误信息</td>
+</tr>
+
+<tr>
+<td>data</td>
+<td><a href="#ohlc-结构体">OHLC</a> Object List</td>
+<td>获取的数据</td>
+</tr>
+</tbody>
+</table>
+
+<aside class="warning">
+如果获取的深度数据一直为空，建议适当增大 <code>opt.period</code>。
+</aside>
+
+    
+
+        </div>
+        <div class="dark-box">
+            
+            <div class="lang-selector">
+                
+                <a href="#" data-language-name="go">Golang</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+</body>
+</html>

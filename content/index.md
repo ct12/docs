@@ -1,5 +1,5 @@
 ---
-weight: 10
+weight: 1
 ---
 
 # 简介
@@ -13,7 +13,7 @@ import (
 
 func main() {
 	client := stockdb.New("http://localhost:8765", "username:password")
-    // balabala
+	// balabala
 }
 ```
 
