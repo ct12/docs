@@ -64,23 +64,23 @@ func main() {
 
 | 请求参数 | 类型 | 必填 | 解释 |
 | -------- | ---- | ---- | ---- |
-| data | [OHLC](#ohlc-结构体) Object | true | 需要新增的数据 |
+| Data | [OHLC](#ohlc-结构体) Object | true | 需要新增的数据 |
 | opt | Object | true | 操作详细设置 |
-| opt.market | String | false | 添加该数据到哪个市场 |
-| opt.symbol | String | false | 添加该数据到哪个分类标识 |
-| opt.period | Long Integer | false | 该数据的周期，单位为秒 |
+| opt.Market | String | false | 添加该数据到哪个市场 |
+| opt.Symbol | String | false | 添加该数据到哪个分类标识 |
+| opt.Period | Long Integer | false | 该数据的周期，单位为秒 |
 
 <aside class="notice">
-如果 <code>opt.market</code>、<code>opt.symbol</code>、<code>opt.period</code> 未设置，将使用 StockDB 服务端的默认配置。
+如果 <code>opt.Market</code>、<code>opt.Symbol</code>、<code>opt.Period</code> 未设置，将使用 StockDB 服务端的默认配置。
 </aside>
 
 <br>
 
 | 响应名称 | 类型 | 解释 |
 | -------- | ---- | ---- |
-| success | Boolean | 是否操作成功 |
-| message | String | 操作失败的错误信息 |
-| data | Null | - |
+| Success | Boolean | 是否操作成功 |
+| Message | String | 操作失败的错误信息 |
+| Data | Null | - |
 
 ## 添加多条数据
 
@@ -125,23 +125,23 @@ func main() {
 
 | 请求参数 | 类型 | 必填 | 解释 |
 | -------- | ---- | ---- | ---- |
-| data | [OHLC](#ohlc-结构体) Object List | true | 需要新增的数据 |
+| Data | [OHLC](#ohlc-结构体) Object List | true | 需要新增的数据 |
 | opt | Object | true | 操作详细设置 |
-| opt.market | String | false | 添加该数据到哪个市场 |
-| opt.symbol | String | false | 添加该数据到哪个分类标识 |
-| opt.period | Long Integer | false | 该数据的周期，单位为秒 |
+| opt.Market | String | false | 添加该数据到哪个市场 |
+| opt.Symbol | String | false | 添加该数据到哪个分类标识 |
+| opt.Period | Long Integer | false | 该数据的周期，单位为秒 |
 
 <aside class="notice">
-如果 <code>opt.market</code>、<code>opt.symbol</code>、<code>opt.period</code> 未设置，将使用 StockDB 服务端的默认配置。
+如果 <code>opt.Market</code>、<code>opt.Symbol</code>、<code>opt.Period</code> 未设置，将使用 StockDB 服务端的默认配置。
 </aside>
 
 <br>
 
 | 响应名称 | 类型 | 解释 |
 | -------- | ---- | ---- |
-| success | Boolean | 是否操作成功 |
-| message | String | 操作失败的错误信息 |
-| data | Null | - |
+| Success | Boolean | 是否操作成功 |
+| Message | String | 操作失败的错误信息 |
+| Data | Null | - |
 
 ## 获取数据
 
@@ -172,23 +172,23 @@ func main() {
 | 请求参数 | 类型 | 必填 | 解释 |
 | -------- | ---- | ---- | ---- |
 | opt | Object | true | 操作详细设置 |
-| opt.market | String | false | 市场 |
-| opt.symbol | String | false | 分类标识 |
-| opt.period | Long Integer | false | 周期，单位为秒 |
-| opt.beginTime | Long Integer | false | 开始时间，UNIX 时间 |
-| opt.endTime | Long Integer | false | 开始时间，UNIX 时间 |
-| opt.invalidPolicy | String | false | 无效数据处理策略，默认为`ibid`，`ibid`表示同上一条数据，`ignore`表示忽略 |
+| opt.Market | String | false | 市场 |
+| opt.Symbol | String | false | 分类标识 |
+| opt.Period | Long Integer | false | 周期，单位为秒 |
+| opt.BeginTime | Long Integer | false | 开始时间，UNIX 时间 |
+| opt.EndTime | Long Integer | false | 开始时间，UNIX 时间 |
+| opt.InvalidPolicy | String | false | 无效数据处理策略，默认为`ibid`，`ibid`表示同上一条数据，`ignore`表示忽略 |
 
 <aside class="notice">
-如果 <code>opt.market</code>、<code>opt.symbol</code>、<code>opt.period</code> 未设置，将使用 StockDB 服务端的默认配置；
-如果 <code>opt.endTime</code> 小于零，将使用该数据的最新时间；
-如果 <code>opt.beginTime</code> 小于零，将使用 <code>opt.endTime - (1000 * opt.period)</code>。
+如果 <code>opt.Market</code>、<code>opt.Symbol</code>、<code>opt.Period</code> 未设置，将使用 StockDB 服务端的默认配置；
+如果 <code>opt.EndTime</code> 小于零，将使用该数据的最新时间；
+如果 <code>opt.BeginTime</code> 小于零，将使用 <code>opt.EndTime - (1000 * opt.Period)</code>。
 </aside>
 
 <br>
 
 | 响应名称 | 类型 | 解释 |
 | -------- | ---- | ---- |
-| success | Boolean | 是否操作成功 |
-| message | String | 操作失败的错误信息 |
-| data | [OHLC](#ohlc-结构体) Object List | 获取的数据 |
+| Success | Boolean | 是否操作成功 |
+| Message | String | 操作失败的错误信息 |
+| Data | [OHLC](#ohlc-结构体) Object List | 获取的数据 |
