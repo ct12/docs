@@ -71,10 +71,28 @@ func main() {
 		Market: "nasdaq",
 		Symbol: "aapl",
 		BeginTime: 1451577600,
-		Period: stockdb.Hour,
+		Period: stockdb.Day,
 	}
 	fmt.Printf("Market Depth:\n%+v\n", client.GetDepth(opt).Data)
 }
+```
+
+```js
+import StockDB from 'stockdb';
+
+const client = StockDB.New('http://localhost:8765', 'username:password');
+const opt = {
+  Market: 'nasdaq',
+  Symbol: 'aapl',
+  BeginTime: 1451577600,
+  Period: StockDB.Day
+};
+
+client.GetDepth(opt, (resp) => {
+  console.log(`Market Depth: ${resp.Date}`);
+}, (func, err) => {
+  console.log(`${func}() error: ${err}`);
+});
 ```
 
 `GetDepth(opt)`

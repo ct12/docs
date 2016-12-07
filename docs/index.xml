@@ -53,19 +53,6 @@
 
 &lt;p&gt;StockDB 是一个处理交易类数据的数据库解决方案，实现了K线变频、模拟历史市场深度、模拟交易等功能。&lt;/p&gt;
 
-&lt;p&gt;对外提供多个编程语言的API接口，支持：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;JavaScript（官方）&lt;/li&gt;
-&lt;li&gt;Golang（官方）&lt;/li&gt;
-&lt;li&gt;Python&lt;/li&gt;
-&lt;li&gt;Java&lt;/li&gt;
-&lt;li&gt;Ruby&lt;/li&gt;
-&lt;li&gt;PHP&lt;/li&gt;
-&lt;li&gt;C++&lt;/li&gt;
-&lt;li&gt;C#&lt;/li&gt;
-&lt;/ul&gt;
-
 &lt;h3 id=&#34;下载&#34;&gt;下载&lt;/h3&gt;
 
 &lt;table&gt;
@@ -104,26 +91,15 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 
+&lt;aside class=&#34;warning&#34;&gt;
+目前由于 API 还不稳定，所以上面的下载地址只是演示地址，并不能下载。
+&lt;/aside&gt;
+
 &lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;
 
 &lt;p&gt;解压后直接运行。&lt;/p&gt;
 
 &lt;h1 id=&#34;基本概念&#34;&gt;基本概念&lt;/h1&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;main&lt;/span&gt;
-
-&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
-    &lt;span class=&#34;s&#34;&gt;&amp;quot;github.com/miaolz123/stockdb/stockdb&amp;quot;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-
-&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-    &lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;stockdb&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;New&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;http://localhost:8765&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;username:password&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-    &lt;span class=&#34;c1&#34;&gt;// balabala&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;注意：把&lt;code&gt;&amp;quot;http://localhost:8765&amp;quot;&lt;/code&gt;和&lt;code&gt;&amp;quot;username:password&amp;quot;&lt;/code&gt;自己的 StockDB 服务端地址和验证。&lt;/p&gt;
-&lt;/blockquote&gt;
 
 &lt;p&gt;为方便理解 StockDB 的一些概念，下面做一些类比：&lt;/p&gt;
 
@@ -163,6 +139,46 @@
 &lt;aside class=&#34;warning&#34;&gt;
 StockDB 依赖 &lt;code&gt;InfluxDB&lt;/code&gt; 或 &lt;code&gt;ELasticSearch&lt;/code&gt; 存储底层数据，请确保有正常运行的 &lt;code&gt;InfluxDB&lt;/code&gt; 或 &lt;code&gt;ELasticSearch&lt;/code&gt; 。
 &lt;/aside&gt;
+
+&lt;h1 id=&#34;客户端&#34;&gt;客户端&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// go get github.com/miaolz123/stockdb/stockdb&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;main&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+    &lt;span class=&#34;s&#34;&gt;&amp;quot;github.com/miaolz123/stockdb/stockdb&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;stockdb&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;New&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;http://localhost:8765&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;username:password&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;c1&#34;&gt;// balabala&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// npm i stockdb -S&lt;/span&gt;
+
+&lt;span class=&#34;kr&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;stockdb&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;New&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;http://localhost:8765&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;username:password&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;// balabala&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;注意：把&lt;code&gt;&amp;quot;http://localhost:8765&amp;quot;&lt;/code&gt;和&lt;code&gt;&amp;quot;username:password&amp;quot;&lt;/code&gt;自己的 StockDB 服务端地址和验证。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;对外提供多个编程语言的API接口，支持：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/stockdb/stockdb-js&#34; target=&#34;_blank&#34;&gt;JavaScript（官方）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/miaolz123/stockdb/tree/master/stockdb&#34; target=&#34;_blank&#34;&gt;Golang（官方）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;li&gt;Java&lt;/li&gt;
+&lt;li&gt;Ruby&lt;/li&gt;
+&lt;li&gt;PHP&lt;/li&gt;
+&lt;li&gt;C++&lt;/li&gt;
+&lt;li&gt;C#&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
@@ -267,6 +283,31 @@ StockDB 依赖 &lt;code&gt;InfluxDB&lt;/code&gt; 或 &lt;code&gt;ELasticSearch&l
         &lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;PutOHLC() error: &amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Message&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
     &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span class=&#34;kr&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;stockdb&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;New&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;http://localhost:8765&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;username:password&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1480737600&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Open&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;109.17&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;High&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;110.09&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Low&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;108.85&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Close&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;109.90&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Volume&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;26528000&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Market&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;nasdaq&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Symbol&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;aapl&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Period&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Day&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+
+&lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;PutOHLC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Success&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`PutOHLC() error: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Message&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;() error: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;code&gt;PutOHLC(data, opt)&lt;/code&gt;&lt;/p&gt;
@@ -391,6 +432,40 @@ StockDB 依赖 &lt;code&gt;InfluxDB&lt;/code&gt; 或 &lt;code&gt;ELasticSearch&l
     &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span class=&#34;kr&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;stockdb&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;New&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;http://localhost:8765&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;username:password&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;Time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1480651200&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;Open&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;110.37&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;High&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;110.94&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;Low&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;109.03&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;Close&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;109.49&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;Volume&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;34324000&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;Time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1480737600&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;Open&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;109.17&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;High&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;110.09&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;Low&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;108.85&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;Close&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;109.90&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;Volume&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;26528000&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Market&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;nasdaq&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Symbol&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;aapl&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Period&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Day&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+
+&lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;PutOHLCs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Success&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`PutOHLCs() error: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Message&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;() error: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;code&gt;PutOHLC(data, opt)&lt;/code&gt;&lt;/p&gt;
 
@@ -492,12 +567,33 @@ StockDB 依赖 &lt;code&gt;InfluxDB&lt;/code&gt; 或 &lt;code&gt;ELasticSearch&l
     &lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;stockdb&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Option&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
         &lt;span class=&#34;nx&#34;&gt;Market&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;nasdaq&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
         &lt;span class=&#34;nx&#34;&gt;Symbol&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;aapl&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-        &lt;span class=&#34;nx&#34;&gt;Period&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;stockdb&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Hour&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;Period&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;stockdb&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Day&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
     &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-    &lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;Hour OHLC:\n%+v\n&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GetOHLCs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;Day OHLC:\n%+v\n&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GetOHLCs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
     &lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Period&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;stockdb&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Week&lt;/span&gt;
     &lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;Week OHLC:\n%+v\n&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GetOHLCs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span class=&#34;kr&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;stockdb&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;New&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;http://localhost:8765&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;username:password&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Market&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;nasdaq&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Symbol&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;aapl&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Period&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Day&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+
+&lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GetOHLCs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`Day OHLC: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;Date&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;() error: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Period&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Week&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GetOHLCs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`Week OHLC: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;Date&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;() error: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;code&gt;GetOHLCs(opt)&lt;/code&gt;&lt;/p&gt;
@@ -717,10 +813,26 @@ StockDB 依赖 &lt;code&gt;InfluxDB&lt;/code&gt; 或 &lt;code&gt;ELasticSearch&l
         &lt;span class=&#34;nx&#34;&gt;Market&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;nasdaq&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
         &lt;span class=&#34;nx&#34;&gt;Symbol&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;aapl&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
         &lt;span class=&#34;nx&#34;&gt;BeginTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1451577600&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-        &lt;span class=&#34;nx&#34;&gt;Period&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;stockdb&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Hour&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;Period&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;stockdb&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Day&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
     &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
     &lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;Market Depth:\n%+v\n&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GetDepth&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span class=&#34;kr&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;stockdb&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;New&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;http://localhost:8765&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;username:password&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Market&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;nasdaq&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Symbol&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;aapl&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;BeginTime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1451577600&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;Period&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;StockDB&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Day&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+
+&lt;span class=&#34;nx&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GetDepth&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`Market Depth: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;Date&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;() error: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;code&gt;GetDepth(opt)&lt;/code&gt;&lt;/p&gt;

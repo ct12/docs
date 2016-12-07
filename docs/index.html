@@ -23,7 +23,7 @@
 </script>
 
 </head>
-<body class="index" data-languages="[ &#34;go&#34; ]">
+<body class="index" data-languages="[ &#34;js&#34; ,  &#34;go&#34; ]">
     <a href="#" id="nav-button">
         <span>
         NAV
@@ -35,6 +35,8 @@
         
         <div class="lang-selector">
             
+            <a href="#" data-language-name="js">JavaScript</a>
+            
             <a href="#" data-language-name="go">Golang</a>
             
         </div>
@@ -45,8 +47,6 @@
          
         
         <ul class="toc-footer">
-            
-            <li><a href="/cn/">简体中文</a></li>
             
             <li><a href="https://github.com/miaolz123/stockdb" target="_blank">Official Repos</a></li>
             
@@ -97,19 +97,6 @@
 
 <p>StockDB 是一个处理交易类数据的数据库解决方案，实现了K线变频、模拟历史市场深度、模拟交易等功能。</p>
 
-<p>对外提供多个编程语言的API接口，支持：</p>
-
-<ul>
-<li>JavaScript（官方）</li>
-<li>Golang（官方）</li>
-<li>Python</li>
-<li>Java</li>
-<li>Ruby</li>
-<li>PHP</li>
-<li>C++</li>
-<li>C#</li>
-</ul>
-
 <h3 id="下载">下载</h3>
 
 <table>
@@ -148,26 +135,15 @@
 </tbody>
 </table>
 
+<aside class="warning">
+目前由于 API 还不稳定，所以上面的下载地址只是演示地址，并不能下载。
+</aside>
+
 <h3 id="安装">安装</h3>
 
 <p>解压后直接运行。</p>
 
 <h1 id="基本概念">基本概念</h1>
-<div class="highlight"><pre><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-    <span class="s">&quot;github.com/miaolz123/stockdb/stockdb&quot;</span>
-<span class="p">)</span>
-
-<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">client</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;http://localhost:8765&quot;</span><span class="p">,</span> <span class="s">&quot;username:password&quot;</span><span class="p">)</span>
-    <span class="c1">// balabala</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<blockquote>
-<p>注意：把<code>&quot;http://localhost:8765&quot;</code>和<code>&quot;username:password&quot;</code>自己的 StockDB 服务端地址和验证。</p>
-</blockquote>
 
 <p>为方便理解 StockDB 的一些概念，下面做一些类比：</p>
 
@@ -207,6 +183,46 @@
 <aside class="warning">
 StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层数据，请确保有正常运行的 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 。
 </aside>
+
+<h1 id="客户端">客户端</h1>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span class="c1">// go get github.com/miaolz123/stockdb/stockdb</span>
+
+<span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&quot;github.com/miaolz123/stockdb/stockdb&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">client</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;http://localhost:8765&quot;</span><span class="p">,</span> <span class="s">&quot;username:password&quot;</span><span class="p">)</span>
+    <span class="c1">// balabala</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// npm i stockdb -S</span>
+
+<span class="kr">import</span> <span class="nx">StockDB</span> <span class="nx">from</span> <span class="s1">&#39;stockdb&#39;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">StockDB</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s1">&#39;http://localhost:8765&#39;</span><span class="p">,</span> <span class="s1">&#39;username:password&#39;</span><span class="p">);</span>
+
+<span class="c1">// balabala</span>
+</code></pre></div>
+
+<blockquote>
+<p>注意：把<code>&quot;http://localhost:8765&quot;</code>和<code>&quot;username:password&quot;</code>自己的 StockDB 服务端地址和验证。</p>
+</blockquote>
+
+<p>对外提供多个编程语言的API接口，支持：</p>
+
+<ul>
+<li><a href="https://github.com/stockdb/stockdb-js" target="_blank">JavaScript（官方）</a></li>
+<li><a href="https://github.com/miaolz123/stockdb/tree/master/stockdb" target="_blank">Golang（官方）</a></li>
+<li>Python</li>
+<li>Java</li>
+<li>Ruby</li>
+<li>PHP</li>
+<li>C++</li>
+<li>C#</li>
+</ul>
 
     
         
@@ -304,6 +320,31 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
         <span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;PutOHLC() error: &quot;</span><span class="p">,</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">Message</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">StockDB</span> <span class="nx">from</span> <span class="s1">&#39;stockdb&#39;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">StockDB</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s1">&#39;http://localhost:8765&#39;</span><span class="p">,</span> <span class="s1">&#39;username:password&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">Time</span><span class="o">:</span> <span class="mi">1480737600</span><span class="p">,</span>
+  <span class="nx">Open</span><span class="o">:</span> <span class="mf">109.17</span><span class="p">,</span>
+  <span class="nx">High</span><span class="o">:</span> <span class="mf">110.09</span><span class="p">,</span>
+  <span class="nx">Low</span><span class="o">:</span> <span class="mf">108.85</span><span class="p">,</span>
+  <span class="nx">Close</span><span class="o">:</span> <span class="mf">109.90</span><span class="p">,</span>
+  <span class="nx">Volume</span><span class="o">:</span> <span class="mi">26528000</span>
+<span class="p">};</span>
+<span class="kr">const</span> <span class="nx">opt</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">Market</span><span class="o">:</span> <span class="s1">&#39;nasdaq&#39;</span><span class="p">,</span>
+  <span class="nx">Symbol</span><span class="o">:</span> <span class="s1">&#39;aapl&#39;</span><span class="p">,</span>
+  <span class="nx">Period</span><span class="o">:</span> <span class="nx">StockDB</span><span class="p">.</span><span class="nx">Day</span>
+<span class="p">};</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">PutOHLC</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">opt</span><span class="p">,</span> <span class="p">(</span><span class="nx">resp</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">resp</span><span class="p">.</span><span class="nx">Success</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`PutOHLC() error: </span><span class="si">${</span><span class="nx">resp</span><span class="p">.</span><span class="nx">Message</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">func</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">func</span><span class="si">}</span><span class="sb">() error: </span><span class="si">${</span><span class="nx">err</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre></div>
 
 <p><code>PutOHLC(data, opt)</code></p>
@@ -428,6 +469,40 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">StockDB</span> <span class="nx">from</span> <span class="s1">&#39;stockdb&#39;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">StockDB</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s1">&#39;http://localhost:8765&#39;</span><span class="p">,</span> <span class="s1">&#39;username:password&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nx">Time</span><span class="o">:</span> <span class="mi">1480651200</span><span class="p">,</span>
+    <span class="nx">Open</span><span class="o">:</span> <span class="mf">110.37</span><span class="p">,</span>
+    <span class="nx">High</span><span class="o">:</span> <span class="mf">110.94</span><span class="p">,</span>
+    <span class="nx">Low</span><span class="o">:</span> <span class="mf">109.03</span><span class="p">,</span>
+    <span class="nx">Close</span><span class="o">:</span> <span class="mf">109.49</span><span class="p">,</span>
+    <span class="nx">Volume</span><span class="o">:</span> <span class="mi">34324000</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="nx">Time</span><span class="o">:</span> <span class="mi">1480737600</span><span class="p">,</span>
+    <span class="nx">Open</span><span class="o">:</span> <span class="mf">109.17</span><span class="p">,</span>
+    <span class="nx">High</span><span class="o">:</span> <span class="mf">110.09</span><span class="p">,</span>
+    <span class="nx">Low</span><span class="o">:</span> <span class="mf">108.85</span><span class="p">,</span>
+    <span class="nx">Close</span><span class="o">:</span> <span class="mf">109.90</span><span class="p">,</span>
+    <span class="nx">Volume</span><span class="o">:</span> <span class="mi">26528000</span>
+  <span class="p">}</span>
+<span class="p">];</span>
+<span class="kr">const</span> <span class="nx">opt</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">Market</span><span class="o">:</span> <span class="s1">&#39;nasdaq&#39;</span><span class="p">,</span>
+  <span class="nx">Symbol</span><span class="o">:</span> <span class="s1">&#39;aapl&#39;</span><span class="p">,</span>
+  <span class="nx">Period</span><span class="o">:</span> <span class="nx">StockDB</span><span class="p">.</span><span class="nx">Day</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">PutOHLCs</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">opt</span><span class="p">,</span> <span class="p">(</span><span class="nx">resp</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">resp</span><span class="p">.</span><span class="nx">Success</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`PutOHLCs() error: </span><span class="si">${</span><span class="nx">resp</span><span class="p">.</span><span class="nx">Message</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">func</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">func</span><span class="si">}</span><span class="sb">() error: </span><span class="si">${</span><span class="nx">err</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
 
 <p><code>PutOHLC(data, opt)</code></p>
 
@@ -529,12 +604,33 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
     <span class="nx">opt</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Option</span><span class="p">{</span>
         <span class="nx">Market</span><span class="p">:</span> <span class="s">&quot;nasdaq&quot;</span><span class="p">,</span>
         <span class="nx">Symbol</span><span class="p">:</span> <span class="s">&quot;aapl&quot;</span><span class="p">,</span>
-        <span class="nx">Period</span><span class="p">:</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Hour</span><span class="p">,</span>
+        <span class="nx">Period</span><span class="p">:</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Day</span><span class="p">,</span>
     <span class="p">}</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Hour OHLC:\n%+v\n&quot;</span><span class="p">,</span> <span class="nx">client</span><span class="p">.</span><span class="nx">GetOHLCs</span><span class="p">(</span><span class="nx">opt</span><span class="p">).</span><span class="nx">Data</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Day OHLC:\n%+v\n&quot;</span><span class="p">,</span> <span class="nx">client</span><span class="p">.</span><span class="nx">GetOHLCs</span><span class="p">(</span><span class="nx">opt</span><span class="p">).</span><span class="nx">Data</span><span class="p">)</span>
     <span class="nx">opt</span><span class="p">.</span><span class="nx">Period</span> <span class="p">=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Week</span>
     <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Week OHLC:\n%+v\n&quot;</span><span class="p">,</span> <span class="nx">client</span><span class="p">.</span><span class="nx">GetOHLCs</span><span class="p">(</span><span class="nx">opt</span><span class="p">).</span><span class="nx">Data</span><span class="p">)</span>
 <span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">StockDB</span> <span class="nx">from</span> <span class="s1">&#39;stockdb&#39;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">StockDB</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s1">&#39;http://localhost:8765&#39;</span><span class="p">,</span> <span class="s1">&#39;username:password&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">opt</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">Market</span><span class="o">:</span> <span class="s1">&#39;nasdaq&#39;</span><span class="p">,</span>
+  <span class="nx">Symbol</span><span class="o">:</span> <span class="s1">&#39;aapl&#39;</span><span class="p">,</span>
+  <span class="nx">Period</span><span class="o">:</span> <span class="nx">StockDB</span><span class="p">.</span><span class="nx">Day</span>
+<span class="p">};</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">GetOHLCs</span><span class="p">(</span><span class="nx">opt</span><span class="p">,</span> <span class="p">(</span><span class="nx">resp</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Day OHLC: </span><span class="si">${</span><span class="nx">resp</span><span class="p">.</span><span class="nb">Date</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">func</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">func</span><span class="si">}</span><span class="sb">() error: </span><span class="si">${</span><span class="nx">err</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">opt</span><span class="p">.</span><span class="nx">Period</span> <span class="o">=</span> <span class="nx">StockDB</span><span class="p">.</span><span class="nx">Week</span><span class="p">;</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">GetOHLCs</span><span class="p">(</span><span class="nx">opt</span><span class="p">,</span> <span class="p">(</span><span class="nx">resp</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Week OHLC: </span><span class="si">${</span><span class="nx">resp</span><span class="p">.</span><span class="nb">Date</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">func</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">func</span><span class="si">}</span><span class="sb">() error: </span><span class="si">${</span><span class="nx">err</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre></div>
 
 <p><code>GetOHLCs(opt)</code></p>
@@ -747,10 +843,26 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
         <span class="nx">Market</span><span class="p">:</span> <span class="s">&quot;nasdaq&quot;</span><span class="p">,</span>
         <span class="nx">Symbol</span><span class="p">:</span> <span class="s">&quot;aapl&quot;</span><span class="p">,</span>
         <span class="nx">BeginTime</span><span class="p">:</span> <span class="mi">1451577600</span><span class="p">,</span>
-        <span class="nx">Period</span><span class="p">:</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Hour</span><span class="p">,</span>
+        <span class="nx">Period</span><span class="p">:</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">Day</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Market Depth:\n%+v\n&quot;</span><span class="p">,</span> <span class="nx">client</span><span class="p">.</span><span class="nx">GetDepth</span><span class="p">(</span><span class="nx">opt</span><span class="p">).</span><span class="nx">Data</span><span class="p">)</span>
 <span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">StockDB</span> <span class="nx">from</span> <span class="s1">&#39;stockdb&#39;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">StockDB</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s1">&#39;http://localhost:8765&#39;</span><span class="p">,</span> <span class="s1">&#39;username:password&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">opt</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">Market</span><span class="o">:</span> <span class="s1">&#39;nasdaq&#39;</span><span class="p">,</span>
+  <span class="nx">Symbol</span><span class="o">:</span> <span class="s1">&#39;aapl&#39;</span><span class="p">,</span>
+  <span class="nx">BeginTime</span><span class="o">:</span> <span class="mi">1451577600</span><span class="p">,</span>
+  <span class="nx">Period</span><span class="o">:</span> <span class="nx">StockDB</span><span class="p">.</span><span class="nx">Day</span>
+<span class="p">};</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">GetDepth</span><span class="p">(</span><span class="nx">opt</span><span class="p">,</span> <span class="p">(</span><span class="nx">resp</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Market Depth: </span><span class="si">${</span><span class="nx">resp</span><span class="p">.</span><span class="nb">Date</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">func</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">func</span><span class="si">}</span><span class="sb">() error: </span><span class="si">${</span><span class="nx">err</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre></div>
 
 <p><code>GetDepth(opt)</code></p>
@@ -850,6 +962,8 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
         <div class="dark-box">
             
             <div class="lang-selector">
+                
+                <a href="#" data-language-name="js">JavaScript</a>
                 
                 <a href="#" data-language-name="go">Golang</a>
                 

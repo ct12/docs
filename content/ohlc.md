@@ -60,6 +60,33 @@ func main() {
 }
 ```
 
+```js
+import StockDB from 'stockdb';
+
+const client = StockDB.New('http://localhost:8765', 'username:password');
+const data = {
+  Time: 1480737600,
+  Open: 109.17,
+  High: 110.09,
+  Low: 108.85,
+  Close: 109.90,
+  Volume: 26528000
+};
+const opt = {
+  Market: 'nasdaq',
+  Symbol: 'aapl',
+  Period: StockDB.Day
+};
+
+client.PutOHLC(data, opt, (resp) => {
+  if (!resp.Success) {
+    console.log(`PutOHLC() error: ${resp.Message}`);
+  }
+}, (func, err) => {
+  console.log(`${func}() error: ${err}`);
+});
+```
+
 `PutOHLC(data, opt)`
 
 | 请求参数 | 类型 | 必填 | 解释 |
@@ -121,6 +148,42 @@ func main() {
 }
 ```
 
+```js
+import StockDB from 'stockdb';
+
+const client = StockDB.New('http://localhost:8765', 'username:password');
+const data = [
+  {
+    Time: 1480651200,
+    Open: 110.37,
+    High: 110.94,
+    Low: 109.03,
+    Close: 109.49,
+    Volume: 34324000
+  }, {
+    Time: 1480737600,
+    Open: 109.17,
+    High: 110.09,
+    Low: 108.85,
+    Close: 109.90,
+    Volume: 26528000
+  }
+];
+const opt = {
+  Market: 'nasdaq',
+  Symbol: 'aapl',
+  Period: StockDB.Day,
+};
+
+client.PutOHLCs(data, opt, (resp) => {
+  if (!resp.Success) {
+    console.log(`PutOHLCs() error: ${resp.Message}`);
+  }
+}, (func, err) => {
+  console.log(`${func}() error: ${err}`);
+});
+```
+
 `PutOHLC(data, opt)`
 
 | 请求参数 | 类型 | 必填 | 解释 |
@@ -159,12 +222,35 @@ func main() {
 	opt := stockdb.Option{
 		Market: "nasdaq",
 		Symbol: "aapl",
-		Period: stockdb.Hour,
+		Period: stockdb.Day,
 	}
-	fmt.Printf("Hour OHLC:\n%+v\n", client.GetOHLCs(opt).Data)
+	fmt.Printf("Day OHLC:\n%+v\n", client.GetOHLCs(opt).Data)
 	opt.Period = stockdb.Week
 	fmt.Printf("Week OHLC:\n%+v\n", client.GetOHLCs(opt).Data)
 }
+```
+
+```js
+import StockDB from 'stockdb';
+
+const client = StockDB.New('http://localhost:8765', 'username:password');
+const opt = {
+  Market: 'nasdaq',
+  Symbol: 'aapl',
+  Period: StockDB.Day
+};
+
+client.GetOHLCs(opt, (resp) => {
+  console.log(`Day OHLC: ${resp.Date}`);
+}, (func, err) => {
+  console.log(`${func}() error: ${err}`);
+});
+opt.Period = StockDB.Week;
+client.GetOHLCs(opt, (resp) => {
+  console.log(`Week OHLC: ${resp.Date}`);
+}, (func, err) => {
+  console.log(`${func}() error: ${err}`);
+});
 ```
 
 `GetOHLCs(opt)`
