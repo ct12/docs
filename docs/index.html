@@ -219,12 +219,12 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
 <p><strong>OHLC</strong> 结构体示例：</p>
 </blockquote>
 <div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
-  <span class="nt">&quot;time&quot;</span><span class="p">:</span> <span class="mi">1451577600</span><span class="p">,</span>
-  <span class="nt">&quot;open&quot;</span><span class="p">:</span> <span class="mf">123.456</span><span class="p">,</span>
-  <span class="nt">&quot;high&quot;</span><span class="p">:</span> <span class="mf">129.123</span><span class="p">,</span>
-  <span class="nt">&quot;low&quot;</span><span class="p">:</span> <span class="mf">110.789</span><span class="p">,</span>
-  <span class="nt">&quot;close&quot;</span><span class="p">:</span> <span class="mf">119.951</span><span class="p">,</span>
-  <span class="nt">&quot;volume&quot;</span><span class="p">:</span> <span class="mf">357.654</span>
+  <span class="nt">&quot;Time&quot;</span><span class="p">:</span> <span class="mi">1451577600</span><span class="p">,</span>
+  <span class="nt">&quot;Open&quot;</span><span class="p">:</span> <span class="mf">123.456</span><span class="p">,</span>
+  <span class="nt">&quot;High&quot;</span><span class="p">:</span> <span class="mf">129.123</span><span class="p">,</span>
+  <span class="nt">&quot;Low&quot;</span><span class="p">:</span> <span class="mf">110.789</span><span class="p">,</span>
+  <span class="nt">&quot;Close&quot;</span><span class="p">:</span> <span class="mf">119.951</span><span class="p">,</span>
+  <span class="nt">&quot;Volume&quot;</span><span class="p">:</span> <span class="mf">357.654</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -239,37 +239,37 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
 
 <tbody>
 <tr>
-<td>time</td>
+<td>Time</td>
 <td>Long Integer</td>
 <td>UNIX 时间，1970年1月1日0时0分0秒起至现在的总秒数</td>
 </tr>
 
 <tr>
-<td>open</td>
+<td>Open</td>
 <td>Double</td>
 <td>单位时间周期内的开盘价</td>
 </tr>
 
 <tr>
-<td>high</td>
+<td>High</td>
 <td>Double</td>
 <td>单位时间周期内的最高价</td>
 </tr>
 
 <tr>
-<td>low</td>
+<td>Low</td>
 <td>Double</td>
 <td>单位时间周期内的最低价</td>
 </tr>
 
 <tr>
-<td>close</td>
+<td>Close</td>
 <td>Double</td>
 <td>单位时间周期内的收盘价</td>
 </tr>
 
 <tr>
-<td>volume</td>
+<td>Volume</td>
 <td>Double</td>
 <td>单位时间周期内的交易量</td>
 </tr>
@@ -320,7 +320,7 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
 
 <tbody>
 <tr>
-<td>Data</td>
+<td>data</td>
 <td><a href="#ohlc-结构体">OHLC</a> Object</td>
 <td>true</td>
 <td>需要新增的数据</td>
@@ -443,7 +443,7 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
 
 <tbody>
 <tr>
-<td>Data</td>
+<td>data</td>
 <td><a href="#ohlc-结构体">OHLC</a> Object List</td>
 <td>true</td>
 <td>需要新增的数据</td>
@@ -650,8 +650,8 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
 <p><strong>OrderBook</strong> 结构体示例：</p>
 </blockquote>
 <div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
-  <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">123.456</span><span class="p">,</span>
-  <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+  <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">123.456</span><span class="p">,</span>
+  <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -666,13 +666,13 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
 
 <tbody>
 <tr>
-<td>price</td>
+<td>Price</td>
 <td>Double</td>
 <td>报价</td>
 </tr>
 
 <tr>
-<td>amount</td>
+<td>Amount</td>
 <td>Double</td>
 <td>数量</td>
 </tr>
@@ -685,24 +685,24 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
 <p><strong>Depth</strong> 结构体示例：</p>
 </blockquote>
 <div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
-  <span class="nt">&quot;bids&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="nt">&quot;Bids&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">122.456</span><span class="p">,</span>
-      <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+      <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">122.456</span><span class="p">,</span>
+      <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">121.456</span><span class="p">,</span>
-      <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+      <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">121.456</span><span class="p">,</span>
+      <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="nt">&quot;asks&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="nt">&quot;Asks&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">124.456</span><span class="p">,</span>
-      <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+      <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">124.456</span><span class="p">,</span>
+      <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">125.456</span><span class="p">,</span>
-      <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+      <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">125.456</span><span class="p">,</span>
+      <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">}</span>
@@ -719,13 +719,13 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
 
 <tbody>
 <tr>
-<td>bids</td>
+<td>Bids</td>
 <td><a href="#orderbook-结构体">OrderBook</a> Object List</td>
 <td>买盘市场深度，按照价格<strong>降序</strong>排列</td>
 </tr>
 
 <tr>
-<td>asks</td>
+<td>Asks</td>
 <td><a href="#orderbook-结构体">OrderBook</a> Object List</td>
 <td>卖盘市场深度，按照价格<strong>升序</strong>排列</td>
 </tr>

@@ -10,23 +10,23 @@ weight: 2
 
 ```json
 {
-  "time": 1451577600,
-  "open": 123.456,
-  "high": 129.123,
-  "low": 110.789,
-  "close": 119.951,
-  "volume": 357.654
+  "Time": 1451577600,
+  "Open": 123.456,
+  "High": 129.123,
+  "Low": 110.789,
+  "Close": 119.951,
+  "Volume": 357.654
 }
 ```
 
 | 字段 | 类型 | 解释 |
 | ---- | ---- | ---- |
-| time | Long Integer | UNIX 时间，1970年1月1日0时0分0秒起至现在的总秒数 |
-| open | Double | 单位时间周期内的开盘价 |
-| high | Double | 单位时间周期内的最高价 |
-| low | Double | 单位时间周期内的最低价 |
-| close | Double | 单位时间周期内的收盘价 |
-| volume | Double | 单位时间周期内的交易量 |
+| Time | Long Integer | UNIX 时间，1970年1月1日0时0分0秒起至现在的总秒数 |
+| Open | Double | 单位时间周期内的开盘价 |
+| High | Double | 单位时间周期内的最高价 |
+| Low | Double | 单位时间周期内的最低价 |
+| Close | Double | 单位时间周期内的收盘价 |
+| Volume | Double | 单位时间周期内的交易量 |
 
 ## 添加一条数据
 
@@ -64,7 +64,7 @@ func main() {
 
 | 请求参数 | 类型 | 必填 | 解释 |
 | -------- | ---- | ---- | ---- |
-| Data | [OHLC](#ohlc-结构体) Object | true | 需要新增的数据 |
+| data | [OHLC](#ohlc-结构体) Object | true | 需要新增的数据 |
 | opt | Object | true | 操作详细设置 |
 | opt.Market | String | false | 添加该数据到哪个市场 |
 | opt.Symbol | String | false | 添加该数据到哪个分类标识 |
@@ -125,7 +125,7 @@ func main() {
 
 | 请求参数 | 类型 | 必填 | 解释 |
 | -------- | ---- | ---- | ---- |
-| Data | [OHLC](#ohlc-结构体) Object List | true | 需要新增的数据 |
+| data | [OHLC](#ohlc-结构体) Object List | true | 需要新增的数据 |
 | opt | Object | true | 操作详细设置 |
 | opt.Market | String | false | 添加该数据到哪个市场 |
 | opt.Symbol | String | false | 添加该数据到哪个分类标识 |

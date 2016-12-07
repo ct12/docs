@@ -10,15 +10,15 @@ weight: 3
 
 ```json
 {
-  "price": 123.456,
-  "amount": 789.01
+  "Price": 123.456,
+  "Amount": 789.01
 }
 ```
 
 | 字段 | 类型 | 解释 |
 | ---- | ---- | ---- |
-| price | Double | 报价 |
-| amount | Double | 数量 |
+| Price | Double | 报价 |
+| Amount | Double | 数量 |
 
 ## Depth 结构体
 
@@ -26,24 +26,24 @@ weight: 3
 
 ```json
 {
-  "bids": [
+  "Bids": [
     {
-      "price": 122.456,
-      "amount": 789.01
+      "Price": 122.456,
+      "Amount": 789.01
     },
     {
-      "price": 121.456,
-      "amount": 789.01
+      "Price": 121.456,
+      "Amount": 789.01
     }
   ],
-  "asks": [
+  "Asks": [
     {
-      "price": 124.456,
-      "amount": 789.01
+      "Price": 124.456,
+      "Amount": 789.01
     },
     {
-      "price": 125.456,
-      "amount": 789.01
+      "Price": 125.456,
+      "Amount": 789.01
     }
   ]
 }
@@ -51,8 +51,8 @@ weight: 3
 
 | 字段 | 类型 | 解释 |
 | ---- | ---- | ---- |
-| bids | [OrderBook](#orderbook-结构体) Object List | 买盘市场深度，按照价格**降序**排列 |
-| asks | [OrderBook](#orderbook-结构体) Object List | 卖盘市场深度，按照价格**升序**排列 |
+| Bids | [OrderBook](#orderbook-结构体) Object List | 买盘市场深度，按照价格**降序**排列 |
+| Asks | [OrderBook](#orderbook-结构体) Object List | 卖盘市场深度，按照价格**升序**排列 |
 
 ## 获取数据
 

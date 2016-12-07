@@ -182,12 +182,12 @@ StockDB 依赖 &lt;code&gt;InfluxDB&lt;/code&gt; 或 &lt;code&gt;ELasticSearch&l
 &lt;p&gt;&lt;strong&gt;OHLC&lt;/strong&gt; 结构体示例：&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-  &lt;span class=&#34;nt&#34;&gt;&amp;quot;time&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1451577600&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-  &lt;span class=&#34;nt&#34;&gt;&amp;quot;open&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;123.456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-  &lt;span class=&#34;nt&#34;&gt;&amp;quot;high&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;129.123&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-  &lt;span class=&#34;nt&#34;&gt;&amp;quot;low&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;110.789&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-  &lt;span class=&#34;nt&#34;&gt;&amp;quot;close&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;119.951&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-  &lt;span class=&#34;nt&#34;&gt;&amp;quot;volume&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;357.654&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;quot;Time&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1451577600&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;quot;Open&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;123.456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;quot;High&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;129.123&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;quot;Low&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;110.789&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;quot;Close&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;119.951&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;quot;Volume&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;357.654&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -202,37 +202,37 @@ StockDB 依赖 &lt;code&gt;InfluxDB&lt;/code&gt; 或 &lt;code&gt;ELasticSearch&l
 
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;time&lt;/td&gt;
+&lt;td&gt;Time&lt;/td&gt;
 &lt;td&gt;Long Integer&lt;/td&gt;
 &lt;td&gt;UNIX 时间，1970年1月1日0时0分0秒起至现在的总秒数&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;open&lt;/td&gt;
+&lt;td&gt;Open&lt;/td&gt;
 &lt;td&gt;Double&lt;/td&gt;
 &lt;td&gt;单位时间周期内的开盘价&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;high&lt;/td&gt;
+&lt;td&gt;High&lt;/td&gt;
 &lt;td&gt;Double&lt;/td&gt;
 &lt;td&gt;单位时间周期内的最高价&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;low&lt;/td&gt;
+&lt;td&gt;Low&lt;/td&gt;
 &lt;td&gt;Double&lt;/td&gt;
 &lt;td&gt;单位时间周期内的最低价&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;close&lt;/td&gt;
+&lt;td&gt;Close&lt;/td&gt;
 &lt;td&gt;Double&lt;/td&gt;
 &lt;td&gt;单位时间周期内的收盘价&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;volume&lt;/td&gt;
+&lt;td&gt;Volume&lt;/td&gt;
 &lt;td&gt;Double&lt;/td&gt;
 &lt;td&gt;单位时间周期内的交易量&lt;/td&gt;
 &lt;/tr&gt;
@@ -283,7 +283,7 @@ StockDB 依赖 &lt;code&gt;InfluxDB&lt;/code&gt; 或 &lt;code&gt;ELasticSearch&l
 
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;Data&lt;/td&gt;
+&lt;td&gt;data&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;#ohlc-结构体&#34;&gt;OHLC&lt;/a&gt; Object&lt;/td&gt;
 &lt;td&gt;true&lt;/td&gt;
 &lt;td&gt;需要新增的数据&lt;/td&gt;
@@ -406,7 +406,7 @@ StockDB 依赖 &lt;code&gt;InfluxDB&lt;/code&gt; 或 &lt;code&gt;ELasticSearch&l
 
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;Data&lt;/td&gt;
+&lt;td&gt;data&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;#ohlc-结构体&#34;&gt;OHLC&lt;/a&gt; Object List&lt;/td&gt;
 &lt;td&gt;true&lt;/td&gt;
 &lt;td&gt;需要新增的数据&lt;/td&gt;
@@ -620,8 +620,8 @@ StockDB 依赖 &lt;code&gt;InfluxDB&lt;/code&gt; 或 &lt;code&gt;ELasticSearch&l
 &lt;p&gt;&lt;strong&gt;OrderBook&lt;/strong&gt; 结构体示例：&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-  &lt;span class=&#34;nt&#34;&gt;&amp;quot;price&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;123.456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-  &lt;span class=&#34;nt&#34;&gt;&amp;quot;amount&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;789.01&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;quot;Price&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;123.456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;quot;Amount&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;789.01&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -636,13 +636,13 @@ StockDB 依赖 &lt;code&gt;InfluxDB&lt;/code&gt; 或 &lt;code&gt;ELasticSearch&l
 
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;price&lt;/td&gt;
+&lt;td&gt;Price&lt;/td&gt;
 &lt;td&gt;Double&lt;/td&gt;
 &lt;td&gt;报价&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;amount&lt;/td&gt;
+&lt;td&gt;Amount&lt;/td&gt;
 &lt;td&gt;Double&lt;/td&gt;
 &lt;td&gt;数量&lt;/td&gt;
 &lt;/tr&gt;
@@ -655,24 +655,24 @@ StockDB 依赖 &lt;code&gt;InfluxDB&lt;/code&gt; 或 &lt;code&gt;ELasticSearch&l
 &lt;p&gt;&lt;strong&gt;Depth&lt;/strong&gt; 结构体示例：&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-  &lt;span class=&#34;nt&#34;&gt;&amp;quot;bids&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;quot;Bids&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
     &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-      &lt;span class=&#34;nt&#34;&gt;&amp;quot;price&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;122.456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-      &lt;span class=&#34;nt&#34;&gt;&amp;quot;amount&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;789.01&lt;/span&gt;
+      &lt;span class=&#34;nt&#34;&gt;&amp;quot;Price&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;122.456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;nt&#34;&gt;&amp;quot;Amount&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;789.01&lt;/span&gt;
     &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
     &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-      &lt;span class=&#34;nt&#34;&gt;&amp;quot;price&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;121.456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-      &lt;span class=&#34;nt&#34;&gt;&amp;quot;amount&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;789.01&lt;/span&gt;
+      &lt;span class=&#34;nt&#34;&gt;&amp;quot;Price&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;121.456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;nt&#34;&gt;&amp;quot;Amount&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;789.01&lt;/span&gt;
     &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
   &lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
-  &lt;span class=&#34;nt&#34;&gt;&amp;quot;asks&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;quot;Asks&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
     &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-      &lt;span class=&#34;nt&#34;&gt;&amp;quot;price&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;124.456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-      &lt;span class=&#34;nt&#34;&gt;&amp;quot;amount&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;789.01&lt;/span&gt;
+      &lt;span class=&#34;nt&#34;&gt;&amp;quot;Price&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;124.456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;nt&#34;&gt;&amp;quot;Amount&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;789.01&lt;/span&gt;
     &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
     &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-      &lt;span class=&#34;nt&#34;&gt;&amp;quot;price&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;125.456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-      &lt;span class=&#34;nt&#34;&gt;&amp;quot;amount&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;789.01&lt;/span&gt;
+      &lt;span class=&#34;nt&#34;&gt;&amp;quot;Price&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;125.456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;nt&#34;&gt;&amp;quot;Amount&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;789.01&lt;/span&gt;
     &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
   &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
@@ -689,13 +689,13 @@ StockDB 依赖 &lt;code&gt;InfluxDB&lt;/code&gt; 或 &lt;code&gt;ELasticSearch&l
 
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;bids&lt;/td&gt;
+&lt;td&gt;Bids&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;#orderbook-结构体&#34;&gt;OrderBook&lt;/a&gt; Object List&lt;/td&gt;
 &lt;td&gt;买盘市场深度，按照价格&lt;strong&gt;降序&lt;/strong&gt;排列&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;asks&lt;/td&gt;
+&lt;td&gt;Asks&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;#orderbook-结构体&#34;&gt;OrderBook&lt;/a&gt; Object List&lt;/td&gt;
 &lt;td&gt;卖盘市场深度，按照价格&lt;strong&gt;升序&lt;/strong&gt;排列&lt;/td&gt;
 &lt;/tr&gt;
