@@ -4,69 +4,51 @@ weight: 1
 
 # 简介
 
-> StockDB 工作原理：
-
-```
-                 ticker or OHLC record
-                           +
-                           |
-     +---------------------+---------------------+
-     |                     |                     |
-     |                     |                     |
-     |           +---------v---------+           |
-     |           |Collection Services|           |
-     |           +---------+---------+           |
-     |                     |                     |
-     |  S                  |(store)              |
-     |  T                  |                     |
-     |  O     +------------v------------+        |
-     |  C     |InfluxDB OR ElasticSearch|        |
-     |  K     +------------+------------+        |
-     |  D                  |                     |
-     |  B                  |(query)              |
-     |                     |                     |
-     |            +--------v--------+            |
-     |            |Analysis Services|            |
-     |            +--------+--------+            |
-     |                     |                     |
-     |                     |                     |
-     +---------------------+---------------------+
-                           |
-                           v
-       multi-period OHLC record, market depth...
-```
+[![GitHub release](https://img.shields.io/github/release/miaolz123/stockdb.svg)](https://github.com/miaolz123/stockdb/releases)
+[![Travis](https://img.shields.io/travis/miaolz123/stockdb.svg)](https://travis-ci.org/miaolz123/stockdb)
+[![Go Report Card](https://goreportcard.com/badge/github.com/miaolz123/stockdb)](https://goreportcard.com/report/github.com/miaolz123/stockdb)
+[![Github All Releases](https://img.shields.io/github/downloads/miaolz123/stockdb/total.svg)](https://github.com/miaolz123/stockdb/releases)
+[![Docker Pulls](https://img.shields.io/docker/pulls/stockdb/stockdb.svg)](https://hub.docker.com/r/stockdb/stockdb/)
 
 StockDB 是一个处理交易类数据的数据库解决方案，实现了K线变频、模拟历史市场深度、模拟交易等功能。
 
-### 下载
+# 安装
 
-| 操作系统 | 地址 |
-| -------- | ---- |
-| Linux 64bit | `http://download.stockdb.org/stockdb.latest.linux-amd64.tar.gz` |
-| MacOS 64bit | `http://download.stockdb.org/stockdb.latest.darwin-amd64.tar.gz` |
-| Windows 64bit | `http://download.stockdb.org/stockdb.latest.windows-amd64.zip` |
-| Linux 32bit | `http://download.stockdb.org/stockdb.latest.linux-386.tar.gz` |
-| Windows 32bit | `http://download.stockdb.org/stockdb.latest.windows-amd64.zip` |
+## 通过 Docker（推荐）
 
-<aside class="warning">
-目前由于 API 还不稳定，所以上面的下载地址只是演示地址，并不能下载。
+``` shell
+$ docker run --name=stockdb -d -p 18765:8765 -v stockdata:/var/lib/influxdb stockdb/stockdb
+```
+
+请确保已经安装了 Docker 并可以正常运行，已在 `Docker version 1.12.3` 版本测试通过。
+
+按照示例命令运行成功后 StockDB 将会映射到主机的`http://0.0.0.0:18765`。
+
+<aside class="notice">
+通过 Docker 安装的版本已经集成了 InfluxDB 服务，不需要另外的数据库依赖。
 </aside>
 
-### 安装
+## 通过二进制文件
 
-解压后直接运行。
-
-# 基本概念
-
-为方便理解 StockDB 的一些概念，下面做一些类比：
-
-| StockDB | MySQL | InfluxDB | ELasticSearch | 解释 | 示例 |
-| ------- | ----- | -------- | ------------- | ---- | ---- |
-| Market | Database | Database | Index | 数据所属的市场 | `nasdaq`，`上证` |
-| Symbol | Tabel | Measurement | Type | 数据的分类标识 | `aapl`，`平安银行` |
+1. 下载对应系统的[二进制文件](https://github.com/miaolz123/stockdb/releases)
+2. 解压后直接运行
 
 <aside class="warning">
-StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层数据，请确保有正常运行的 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 。
+通过二进制文件安装的版本没有集成底层数据库，需要配置额外的 InfluxDB 或 ElasticSerach 服务。
+</aside>
+
+## 通过源代码
+
+``` shell
+$ git clone https://github.com/miaolz123/stockdb.git
+$ cd stockdb
+$ go get && go build
+```
+
+请确保已经安装了 Golang 运行环境，已在 `go 1.6.2` 版本测试通过。
+
+<aside class="warning">
+通过源码安装的版本没有集成底层数据库，需要配置额外的 InfluxDB 或 ElasticSerach 服务。
 </aside>
 
 # 客户端

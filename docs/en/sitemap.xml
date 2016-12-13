@@ -6,11 +6,15 @@
   </url>
   
   <url>
-    <loc>http://docuapi.com/ohlc/</loc>
+    <loc>http://docuapi.com/struct/</loc>
   </url>
   
   <url>
-    <loc>http://docuapi.com/depth/</loc>
+    <loc>http://docuapi.com/store/</loc>
+  </url>
+  
+  <url>
+    <loc>http://docuapi.com/query/</loc>
   </url>
   
   <url>

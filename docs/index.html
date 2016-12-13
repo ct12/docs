@@ -62,126 +62,49 @@
 
 <h1 id="简介">简介</h1>
 
-<blockquote>
-<p>StockDB 工作原理：</p>
-</blockquote>
-
-<pre><code>                 ticker or OHLC record
-                           +
-                           |
-     +---------------------+---------------------+
-     |                     |                     |
-     |                     |                     |
-     |           +---------v---------+           |
-     |           |Collection Services|           |
-     |           +---------+---------+           |
-     |                     |                     |
-     |  S                  |(store)              |
-     |  T                  |                     |
-     |  O     +------------v------------+        |
-     |  C     |InfluxDB OR ElasticSearch|        |
-     |  K     +------------+------------+        |
-     |  D                  |                     |
-     |  B                  |(query)              |
-     |                     |                     |
-     |            +--------v--------+            |
-     |            |Analysis Services|            |
-     |            +--------+--------+            |
-     |                     |                     |
-     |                     |                     |
-     +---------------------+---------------------+
-                           |
-                           v
-       multi-period OHLC record, market depth...
-</code></pre>
+<p><a href="https://github.com/miaolz123/stockdb/releases" target="_blank"><img src="https://img.shields.io/github/release/miaolz123/stockdb.svg" alt="GitHub release" /></a>
+<a href="https://travis-ci.org/miaolz123/stockdb" target="_blank"><img src="https://img.shields.io/travis/miaolz123/stockdb.svg" alt="Travis" /></a>
+<a href="https://goreportcard.com/report/github.com/miaolz123/stockdb" target="_blank"><img src="https://goreportcard.com/badge/github.com/miaolz123/stockdb" alt="Go Report Card" /></a>
+<a href="https://github.com/miaolz123/stockdb/releases" target="_blank"><img src="https://img.shields.io/github/downloads/miaolz123/stockdb/total.svg" alt="Github All Releases" /></a>
+<a href="https://hub.docker.com/r/stockdb/stockdb/" target="_blank"><img src="https://img.shields.io/docker/pulls/stockdb/stockdb.svg" alt="Docker Pulls" /></a></p>
 
 <p>StockDB 是一个处理交易类数据的数据库解决方案，实现了K线变频、模拟历史市场深度、模拟交易等功能。</p>
 
-<h3 id="下载">下载</h3>
+<h1 id="安装">安装</h1>
 
-<table>
-<thead>
-<tr>
-<th>操作系统</th>
-<th>地址</th>
-</tr>
-</thead>
+<h2 id="通过-docker-推荐">通过 Docker（推荐）</h2>
+<div class="highlight"><pre><code class="language-shell" data-lang="shell">$ docker run --name<span class="o">=</span>stockdb -d -p 18765:8765 -v stockdata:/var/lib/influxdb stockdb/stockdb
+</code></pre></div>
 
-<tbody>
-<tr>
-<td>Linux 64bit</td>
-<td><code>http://download.stockdb.org/stockdb.latest.linux-amd64.tar.gz</code></td>
-</tr>
+<p>请确保已经安装了 Docker 并可以正常运行，已在 <code>Docker version 1.12.3</code> 版本测试通过。</p>
 
-<tr>
-<td>MacOS 64bit</td>
-<td><code>http://download.stockdb.org/stockdb.latest.darwin-amd64.tar.gz</code></td>
-</tr>
+<p>按照示例命令运行成功后 StockDB 将会映射到主机的<code>http://0.0.0.0:18765</code>。</p>
 
-<tr>
-<td>Windows 64bit</td>
-<td><code>http://download.stockdb.org/stockdb.latest.windows-amd64.zip</code></td>
-</tr>
-
-<tr>
-<td>Linux 32bit</td>
-<td><code>http://download.stockdb.org/stockdb.latest.linux-386.tar.gz</code></td>
-</tr>
-
-<tr>
-<td>Windows 32bit</td>
-<td><code>http://download.stockdb.org/stockdb.latest.windows-amd64.zip</code></td>
-</tr>
-</tbody>
-</table>
-
-<aside class="warning">
-目前由于 API 还不稳定，所以上面的下载地址只是演示地址，并不能下载。
+<aside class="notice">
+通过 Docker 安装的版本已经集成了 InfluxDB 服务，不需要另外的数据库依赖。
 </aside>
 
-<h3 id="安装">安装</h3>
+<h2 id="通过二进制文件">通过二进制文件</h2>
 
-<p>解压后直接运行。</p>
-
-<h1 id="基本概念">基本概念</h1>
-
-<p>为方便理解 StockDB 的一些概念，下面做一些类比：</p>
-
-<table>
-<thead>
-<tr>
-<th>StockDB</th>
-<th>MySQL</th>
-<th>InfluxDB</th>
-<th>ELasticSearch</th>
-<th>解释</th>
-<th>示例</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>Market</td>
-<td>Database</td>
-<td>Database</td>
-<td>Index</td>
-<td>数据所属的市场</td>
-<td><code>nasdaq</code>，<code>上证</code></td>
-</tr>
-
-<tr>
-<td>Symbol</td>
-<td>Tabel</td>
-<td>Measurement</td>
-<td>Type</td>
-<td>数据的分类标识</td>
-<td><code>aapl</code>，<code>平安银行</code></td>
-</tr>
-</tbody>
-</table>
+<ol>
+<li>下载对应系统的<a href="https://github.com/miaolz123/stockdb/releases" target="_blank">二进制文件</a></li>
+<li>解压后直接运行</li>
+</ol>
 
 <aside class="warning">
-StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层数据，请确保有正常运行的 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 。
+通过二进制文件安装的版本没有集成底层数据库，需要配置额外的 InfluxDB 或 ElasticSerach 服务。
+</aside>
+
+<h2 id="通过源代码">通过源代码</h2>
+<div class="highlight"><pre><code class="language-shell" data-lang="shell">$ git clone https://github.com/miaolz123/stockdb.git
+$ <span class="nb">cd</span> stockdb
+$ go get <span class="o">&amp;&amp;</span> go build
+</code></pre></div>
+
+<p>请确保已经安装了 Golang 运行环境，已在 <code>go 1.6.2</code> 版本测试通过。</p>
+
+<aside class="warning">
+通过源码安装的版本没有集成底层数据库，需要配置额外的 InfluxDB 或 ElasticSerach 服务。
 </aside>
 
 <h1 id="客户端">客户端</h1>
@@ -227,7 +150,44 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
     
         
 
-<h1 id="k线数据">K线数据</h1>
+<h1 id="模型">模型</h1>
+
+<h2 id="基本概念">基本概念</h2>
+
+<p>为方便理解 StockDB 的一些概念，下面做一些类比：</p>
+
+<table>
+<thead>
+<tr>
+<th>StockDB</th>
+<th>MySQL</th>
+<th>InfluxDB</th>
+<th>ELasticSearch</th>
+<th>解释</th>
+<th>示例</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Market</td>
+<td>Database</td>
+<td>Database</td>
+<td>Index</td>
+<td>数据所属的市场</td>
+<td><code>nasdaq</code>，<code>上证</code></td>
+</tr>
+
+<tr>
+<td>Symbol</td>
+<td>Tabel</td>
+<td>Measurement</td>
+<td>Type</td>
+<td>数据的分类标识</td>
+<td><code>aapl</code>，<code>平安银行</code></td>
+</tr>
+</tbody>
+</table>
 
 <h2 id="ohlc-结构体">OHLC 结构体</h2>
 
@@ -292,7 +252,100 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
 </tbody>
 </table>
 
-<h2 id="添加一条数据">添加一条数据</h2>
+<h2 id="orderbook-结构体">OrderBook 结构体</h2>
+
+<blockquote>
+<p><strong>OrderBook</strong> 结构体示例：</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">123.456</span><span class="p">,</span>
+  <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Price</td>
+<td>Double</td>
+<td>报价</td>
+</tr>
+
+<tr>
+<td>Amount</td>
+<td>Double</td>
+<td>数量</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="depth-结构体">Depth 结构体</h2>
+
+<blockquote>
+<p><strong>Depth</strong> 结构体示例：</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&quot;Bids&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">122.456</span><span class="p">,</span>
+      <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">121.455</span><span class="p">,</span>
+      <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;Asks&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">124.456</span><span class="p">,</span>
+      <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">125.457</span><span class="p">,</span>
+      <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Bids</td>
+<td><a href="#orderbook-结构体">OrderBook</a> Object List</td>
+<td>买盘市场深度，按照价格<strong>降序</strong>排列</td>
+</tr>
+
+<tr>
+<td>Asks</td>
+<td><a href="#orderbook-结构体">OrderBook</a> Object List</td>
+<td>卖盘市场深度，按照价格<strong>升序</strong>排列</td>
+</tr>
+</tbody>
+</table>
+
+    
+        
+
+<h1 id="存储">存储</h1>
+
+<h2 id="添加一条k线数据">添加一条K线数据</h2>
 <div class="highlight"><pre><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
@@ -433,7 +486,7 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
 </tbody>
 </table>
 
-<h2 id="添加多条数据">添加多条数据</h2>
+<h2 id="添加多条k线数据">添加多条K线数据</h2>
 <div class="highlight"><pre><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
@@ -590,7 +643,148 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
 </tbody>
 </table>
 
-<h2 id="获取数据">获取数据</h2>
+    
+        
+
+<h1 id="查询">查询</h1>
+
+<h2 id="获取-market">获取 Market</h2>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&quot;fmt&quot;</span>
+
+    <span class="s">&quot;github.com/miaolz123/stockdb/stockdb&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">client</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;http://localhost:8765&quot;</span><span class="p">,</span> <span class="s">&quot;username:password&quot;</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;All Markets:\n%+v\n&quot;</span><span class="p">,</span> <span class="nx">client</span><span class="p">.</span><span class="nx">GetMarkets</span><span class="p">().</span><span class="nx">Data</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">StockDB</span> <span class="nx">from</span> <span class="s1">&#39;stockdb&#39;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">StockDB</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s1">&#39;http://localhost:8765&#39;</span><span class="p">,</span> <span class="s1">&#39;username:password&#39;</span><span class="p">);</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">GetMarkets</span><span class="p">((</span><span class="nx">resp</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`All Markets: </span><span class="si">${</span><span class="nx">resp</span><span class="p">.</span><span class="nb">Date</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">func</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">func</span><span class="si">}</span><span class="sb">() error: </span><span class="si">${</span><span class="nx">err</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<p><code>GetMarkets()</code></p>
+
+<table>
+<thead>
+<tr>
+<th>响应名称</th>
+<th>类型</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Success</td>
+<td>Boolean</td>
+<td>是否操作成功</td>
+</tr>
+
+<tr>
+<td>Message</td>
+<td>String</td>
+<td>操作失败的错误信息</td>
+</tr>
+
+<tr>
+<td>Data</td>
+<td>String List</td>
+<td>获取的数据</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="获取-symbol">获取 Symbol</h2>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&quot;fmt&quot;</span>
+
+    <span class="s">&quot;github.com/miaolz123/stockdb/stockdb&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">client</span> <span class="o">:=</span> <span class="nx">stockdb</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;http://localhost:8765&quot;</span><span class="p">,</span> <span class="s">&quot;username:password&quot;</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;All Symbols:\n%+v\n&quot;</span><span class="p">,</span> <span class="nx">client</span><span class="p">.</span><span class="nx">GetSymbols</span><span class="p">(</span><span class="s">&quot;nasdaq&quot;</span><span class="p">).</span><span class="nx">Data</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">StockDB</span> <span class="nx">from</span> <span class="s1">&#39;stockdb&#39;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">StockDB</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s1">&#39;http://localhost:8765&#39;</span><span class="p">,</span> <span class="s1">&#39;username:password&#39;</span><span class="p">);</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">GetSymbols</span><span class="p">(</span><span class="s1">&#39;nasdaq&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">resp</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`All Symbols: </span><span class="si">${</span><span class="nx">resp</span><span class="p">.</span><span class="nb">Date</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">func</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">func</span><span class="si">}</span><span class="sb">() error: </span><span class="si">${</span><span class="nx">err</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<p><code>GetSymbols(market)</code></p>
+
+<table>
+<thead>
+<tr>
+<th>请求参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>market</td>
+<td>String</td>
+<td>true</td>
+<td>指定一个 Market</td>
+</tr>
+</tbody>
+</table>
+
+<p><br></p>
+
+<table>
+<thead>
+<tr>
+<th>响应名称</th>
+<th>类型</th>
+<th>解释</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Success</td>
+<td>Boolean</td>
+<td>是否操作成功</td>
+</tr>
+
+<tr>
+<td>Message</td>
+<td>String</td>
+<td>操作失败的错误信息</td>
+</tr>
+
+<tr>
+<td>Data</td>
+<td>String List</td>
+<td>获取的数据</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="获取k线数据">获取K线数据</h2>
 <div class="highlight"><pre><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
@@ -735,100 +929,7 @@ StockDB 依赖 <code>InfluxDB</code> 或 <code>ELasticSearch</code> 存储底层
 </tbody>
 </table>
 
-    
-        
-
-<h1 id="市场深度">市场深度</h1>
-
-<h2 id="orderbook-结构体">OrderBook 结构体</h2>
-
-<blockquote>
-<p><strong>OrderBook</strong> 结构体示例：</p>
-</blockquote>
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
-  <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">123.456</span><span class="p">,</span>
-  <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>解释</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>Price</td>
-<td>Double</td>
-<td>报价</td>
-</tr>
-
-<tr>
-<td>Amount</td>
-<td>Double</td>
-<td>数量</td>
-</tr>
-</tbody>
-</table>
-
-<h2 id="depth-结构体">Depth 结构体</h2>
-
-<blockquote>
-<p><strong>Depth</strong> 结构体示例：</p>
-</blockquote>
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
-  <span class="nt">&quot;Bids&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">122.456</span><span class="p">,</span>
-      <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">121.456</span><span class="p">,</span>
-      <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
-    <span class="p">}</span>
-  <span class="p">],</span>
-  <span class="nt">&quot;Asks&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">124.456</span><span class="p">,</span>
-      <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;Price&quot;</span><span class="p">:</span> <span class="mf">125.456</span><span class="p">,</span>
-      <span class="nt">&quot;Amount&quot;</span><span class="p">:</span> <span class="mf">789.01</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>解释</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>Bids</td>
-<td><a href="#orderbook-结构体">OrderBook</a> Object List</td>
-<td>买盘市场深度，按照价格<strong>降序</strong>排列</td>
-</tr>
-
-<tr>
-<td>Asks</td>
-<td><a href="#orderbook-结构体">OrderBook</a> Object List</td>
-<td>卖盘市场深度，按照价格<strong>升序</strong>排列</td>
-</tr>
-</tbody>
-</table>
-
-<h2 id="获取数据">获取数据</h2>
+<h2 id="获取深度数据">获取深度数据</h2>
 <div class="highlight"><pre><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
