@@ -30,7 +30,7 @@ $ docker run --name=stockdb -d -p 18765:8765 -v stockdata:/var/lib/influxdb stoc
 
 ## 通过二进制文件
 
-1. 下载对应系统的[二进制文件](https://github.com/miaolz123/stockdb/releases)
+1. 下载对应系统的[二进制文件](https://github.com/miaolz123/stockdb/releases/latest)
 2. 解压后直接运行
 
 <aside class="warning">
